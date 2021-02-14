@@ -93,7 +93,7 @@ module buildings() {
 }
 
 module grounds() {
-    difference() {
+    union() {
         linear_extrude(height=10) {
             hull() {
                 translate([0, -20, 0])
@@ -106,10 +106,10 @@ module grounds() {
                     circle(r=10);
             }
         }
-        translate([80, -25, 8])
-            linear_extrude(height=10) {
+        translate([79, -22, 8])
+            linear_extrude(height=4) {
                 rotate([0, 0, 90])
-                    text("Chateau de Le Bolté", font="Liberation Sans:style=Italic", size=9);
+                    text("Chateau de Le Bolté", font="Liberation Sans:style=Bold", size=8);
             }
     }
 }

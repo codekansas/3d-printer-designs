@@ -1,6 +1,3 @@
-# Don't include STL files in the git repo.
-*.stl
-
 # IDE
 .vscode/
 .DS_Store/

@@ -61,7 +61,7 @@ image_distance = 12 * 4 * one_inch;
 mirror_height = 12 * 3 * one_inch;
 
 // Distance to the sun (very large).
-sun_distance = 100000;
+sun_distance = 12 * 8 * one_inch;
 
 /*
 Heart layout
@@ -194,6 +194,7 @@ module pillar(hex_x, hex_y, heart_x, heart_y) {
 
     draw_ray(sun_vec_full);
     draw_ray(img_vec_full);
+    draw_ray([norm_vec[0] * 200, norm_vec[1] * 200, norm_vec[2] * 200]);
     */
 
     rad = 0.5 * one_inch;
@@ -207,10 +208,11 @@ module pillar(hex_x, hex_y, heart_x, heart_y) {
             difference() {
                 linear_extrude(10)
                     circle(r=rad, $fn=6);
-                translate([0, 0, 3])
+                translate([0, 0, 3]) {
                     rotate_by(norm_vec)
                         translate([-one_inch, -one_inch, -one_inch])
                             cube([one_inch * 2, one_inch * 2, one_inch]);
+                }
             }
     }
 }
@@ -223,10 +225,11 @@ module block(i) {
 
     hex_x = (hex_positions[i][0] - hex_center_x) * 0.5 * one_inch * cos(30);
     hex_y = (hex_center_y - hex_positions[i][1]) * 0.5 * one_inch;
-    heart_x = (heart_positions[i][0] - heart_center_x) * 1.0 * one_inch;
-    heart_y = (heart_center_y - heart_positions[i][1]) * 1.0 * one_inch;
+    heart_x = (heart_positions[i][0] - heart_center_x) * 5.0 * one_inch;
+    heart_y = (heart_center_y - heart_positions[i][1]) * 5.0 * one_inch;
     translate([hex_x, hex_y, 0])
         pillar(hex_x, hex_y, heart_x, heart_y);
 }
 
 for (i = [0:len(hex_positions) - 1]) block(i);
+// block(8);
